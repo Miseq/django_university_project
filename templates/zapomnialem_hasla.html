@@ -1,0 +1,67 @@
+{% extends "index_base.html" %} {% load static %} {% block body %}
+
+    <style scoped>
+        html,
+        body {
+            height: 100%;
+        }
+
+        login-main {
+            display: -ms-flexbox;
+            display: -webkit-box;
+            display: flex;
+            -ms-flex-align: center;
+            -ms-flex-pack: center;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
+
+        .password-reset {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+
+        .password-reset .checkbox {
+            font-weight: 400;
+        }
+
+        .password-reset .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .password-reset .form-control:focus {
+            z-index: 2;
+        }
+
+        .password-reset input[type="text"] {
+            margin-bottom: 10px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    </style>
+
+
+
+
+    <div class="login-main text-center" style="margin-top: 20vh">
+        <form method="post" class="password-reset">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 font-weight-normal">Przypomnienie hasła</h1>
+            {{ form.as_p }}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Przypomnij</button>
+        </form>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "index_base.html" %} {% load static %} {% block body-fw %}
+
+    <style scoped>
+        .inp {
+            margin-top: 1rem;
+        }
+    </style>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col" style="max-width: 350px;">
+            <div class="text-center">
+                <div id="errors">{{ registrationError }}</div>
+                <form method="post" class="form-signin">
+                    {% csrf_token %}
+                    <h1 class="h3 mb-3 font-weight-normal">Zarejestruj się</h1>
+                    <input type="text" name="username" id="inputUsername" class="form-control inp" placeholder="Login"
+                           required autofocus>
+                    <div class="text-danger" type="errors" id="usernameError"></div>
+                    <input type="text" name="email" id="inputEmail" class="form-control inp" placeholder="Email"
+                           required autofocus>
+                    <div class="text-danger" type="errors" id="emailError"></div>
+                    <input type="text" name="email2" id="inputEmail2" class="form-control inp"
+                           placeholder="Powtórz Email" required autofocus>
+                    <div class="text-danger" type="errors" id="email2Error"></div>
+                    <input type="password" name="password" id="inputPassword" class="form-control inp"
+                           placeholder="Hasło" required>
+                    <div class="text-danger" type="errors" id="passError"></div>
+                    <input type="password" name="password2" id="inputPassword2" class="form-control inp"
+                           placeholder="Powtórz Hasło" required>
+                    <div class="text-danger" type="errors" id="pass2Error"></div>
+                    <button class="btn btn-lg btn-primary btn-block mt-5" type="submit" id="button1">Rejestruj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var userinp = document.getElementById("inputUsername");
+        var emailinp = document.getElementById("inputEmail");
+        var email2inp = document.getElementById("inputEmail2");
+        var passinp = document.getElementById("inputPassword");
+        var pass2inp = document.getElementById("inputPassword2");
+        var button1 = document.getElementById("button1");
+        var usernameflag = passwordlengthflag = passwordcompareflag = emailcorrectflag = emailcompareflag = 0;
+
+        var usernameError = "Nazwa użytkownika musi być dłuższa niż 5";
+        var emailError = "Niepoprawny adres email";
+        var email2Error = "Adresy email muszą być takie same";
+        var passError = "Hasło musi być dłuższe niż 8";
+        var pass2Error = "Hasła muszą być takie same";
+
+
+        button1.disabled = true;
+
+        userinp.addEventListener('keyup', function (e) {
+            var username = document.getElementById("inputUsername").value;
+            if (username.length < 5) {
+                document.getElementById("usernameError").innerHTML = usernameError;
+                usernameflag = 0;
+            } else {
+                usernameflag = 1;
+                document.getElementById("usernameError").innerHTML = "";
+            }
+            if (usernameflag == 1 && passwordlengthflag == 1 && passwordcompareflag == 1 && emailcorrectflag == 1 && emailcompareflag == 1) (button1.disabled = false)
+            else (button1.disabled = true)
+        });
+
+        emailinp.addEventListener('keyup', function (e) {
+            const mailReg = new RegExp('^[0-9a-z_.-]+@[0-9a-z.-]+[.][a-z]{2,3}$', 'i');
+            var email = document.getElementById("inputEmail").value;
+            if (!mailReg.test(this.value)) {
+                document.getElementById("emailError").innerHTML = emailError;
+                passwordlengthflag = 0;
+            } else {
+                passwordlengthflag = 1;
+                document.getElementById("emailError").innerHTML = "";
+            }
+            if (usernameflag == 1 && passwordlengthflag == 1 && passwordcompareflag == 1 && emailcorrectflag == 1 && emailcompareflag == 1) (button1.disabled = false)
+            else (button1.disabled = true)
+        });
+
+        email2inp.addEventListener('keyup', function (e) {
+            var email = document.getElementById("inputEmail").value;
+            var email2 = document.getElementById("inputEmail2").value;
+            if (email != email2) {
+                document.getElementById("email2Error").innerHTML = email2Error;
+                passwordcompareflag = 0;
+            } else {
+                passwordcompareflag = 1;
+                document.getElementById("email2Error").innerHTML = "";
+            }
+            if (usernameflag == 1 && passwordlengthflag == 1 && passwordcompareflag == 1 && emailcorrectflag == 1 && emailcompareflag == 1) (button1.disabled = false)
+            else (button1.disabled = true)
+        });
+
+        passinp.addEventListener('keyup', function (e) {
+            var password = document.getElementById("inputPassword").value;
+            if (password.length < 8) {
+                document.getElementById("passError").innerHTML = passError;
+                emailcorrectflag = 0;
+            } else {
+                emailcorrectflag = 1;
+                document.getElementById("passError").innerHTML = "";
+            }
+            if (usernameflag == 1 && passwordlengthflag == 1 && passwordcompareflag == 1 && emailcorrectflag == 1 && emailcompareflag == 1) (button1.disabled = false)
+            else (button1.disabled = true)
+        });
+
+        pass2inp.addEventListener('keyup', function (e) {
+            var password = document.getElementById("inputPassword").value;
+            var password2 = document.getElementById("inputPassword2").value;
+            if (password != password2) {
+                document.getElementById("pass2Error").innerHTML = pass2Error;
+                emailcompareflag = 0;
+            } else {
+                emailcompareflag = 1;
+                document.getElementById("pass2Error").innerHTML = "";
+            }
+            if (usernameflag == 1 && passwordlengthflag == 1 && passwordcompareflag == 1 && emailcorrectflag == 1 && emailcompareflag == 1) (button1.disabled = false)
+            else (button1.disabled = true)
+        });
+
+
+    </script> {% endblock %}

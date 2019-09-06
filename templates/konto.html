@@ -1,0 +1,101 @@
+{% extends "index_base.html" %}
+
+{% load static %}
+{% block body %}
+
+    <style>
+        input.hidden {
+            position: absolute;
+            left: -9999px;
+        }
+
+        #profile-image1 {
+            cursor: pointer;
+            width: auto;
+            height: 150px;
+            border: 2px solid #03b1ce;
+        }
+
+        .tital {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .bot-border {
+            border-bottom: 1px #f8f8f8 solid;
+            margin: 5px 0 5px 0;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="panel panel-default">
+                    <div class="row alert alert-info mt-3">
+                        <div class="col"><h3>Profil użytkownika</h3></div>
+                        <div class="col-auto btn btn-outline-primary my-sm-0"><a href="/edycja_konta/">Edycja Konta</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div align="center">
+                                        <img alt="brak zdjecia" src="{{ Profile.AvatarURL }}" id="profile-image1"
+                                             class="img-circle img-responsive">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h3 style="color:#00b1b1;">{{ user }}</h3>
+                                    {% if Profile.IsAdmin %}
+                                        <h6>Administrator</h6>
+                                    {% else %}
+                                        <h6>Zwykły użytkownik</h6>
+                                    {% endif %}
+                                    {% if Profile.IsPrivate %}
+                                        <h6>Osoba prywatna</h6>
+                                    {% endif %}
+                                    {% if Profile.IsOrganisation %}
+                                        <h6>Organizacja</h6>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <hr style="margin:10px 0 5px 0;">
+
+                            <div class="col-sm-5 tital">Imie:</div>
+                            <div class="col-auto">{{ Profile.FirstName }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 tital">Nazwisko:</div>
+                            <div class="col-auto">{{ Profile.Surname }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 tital">Email:</div>
+                            <div class="col-auto" style="word-wrap:break-word;">{{ Profile.Email }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 tital">Data dołączenia:</div>
+                            <div class="col-auto">{{ Profile.JoinDate }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 tital">Punkty:</div>
+                            <div class="col-auto">{{ Profile.Score }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 tital">Opis:</div>
+                            <div class="col-auto" style="word-wrap:break-word;">{{ Profile.Description }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,79 @@
+﻿<!doctype html>
+<html lang="pl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Nasz własny CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static "style.css" %}">
+    {% block title %}<title>Projekt</title>{% endblock %}
+</head>
+
+<body style="min-height: 100%">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="/">Projekt</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Strona główna <span class="sr-only">(aktualna)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/miejsca">Miejsca<span class="sr-only">(aktualna)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/trasy">Trasy<span class="sr-only">(aktualna)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt">Kontakt<span class="sr-only">(aktualna)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/o_nas">O nas<span class="sr-only">(aktualna)</span></a>
+            </li>
+        </ul>
+        {% if user.username %}
+            <a class="text-muted ml-3" style="font-size: 18px;" href="/konto/">
+                {{ user.username }}</a>
+            <!--  TODO do href dodać link do konta użytkownika, zależnie jak będ przedstawiane -->
+            <a class="btn btn-sm btn-outline-primary my-2 my-sm-0 ml-3" href="{% url 'logout' %}">Wyloguj się</a>
+        {% else %}
+            <a class="btn btn-sm btn-outline-primary my-2 my-sm-0 ml-3" href="/logowanie/">Zaloguj się</a>
+            <a class="btn btn-sm btn-outline-primary my-2 my-sm-0 ml-3" href="/rejestracja">Zarejestruj sie</a>
+        {% endif %}
+    </div>
+</nav>
+
+{% block body-fw %}
+    <div class="container mt-5">
+        <div class="bg-white p-5" style="box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+            {% block body %} {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+<!-- Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends "index_base.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class="container">
+        <p>
+        <h3>Lista tras</h3></p>
+        <div class="row">
+            <div class="col">
+                {% for route in routes %}
+                    <div class="row">
+                        <div class="col">
+                            <a href="/../trasa_id/{{ route.RouteID }}">{{ route.Name }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <br/>
+
+        {% if user.is_authenticated %}
+            <form method="POST">
+                {% csrf_token %}
+                <form>
+                    <div class="container">
+                        <br><a href="/../trasa_dodaj/" button class="btn btn-primary">Dodaj trasę</a></button><br><br>
+                    </div>
+                </form>
+            </form>
+        {% elif 1 %}
+            <a href="../../../logowanie/">
+                <p class="rate pdn">Zaloguj się aby dodać trasę</p>
+            </a>
+        {% endif %}
+    </div>
+
+{% endblock %}

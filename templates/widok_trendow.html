@@ -1,0 +1,31 @@
+{% extends "index_base.html" %}
+{% load static %}
+
+{% block body %}
+    <!--suppress SpellCheckingInspection -->
+
+    <div style="background-color: rgb(243, 243, 243);">
+        <div class="container">
+            <br/>
+            <h4>Najczęściej odwiedzane miejsca przez użytkowników</h4>
+            <br/>
+            <div class="row">
+                {% for place in places %}
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="card" style="width: 18rem; margin: 0 auto;">
+                            <img class="card-img-top" src=" {{ place.IconURL }} " alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ place.Name }}</h5>
+                                <p class="card-text">{{ place.Location }}</p>
+                                <p class="card-text">{{ place.Description }}</p>
+                                <a href="/miejsce_id/{{ place.PlaceID }}" class="btn btn-primary">Szczegóły</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <br/>
+        </div>
+    </div>
+
+{% endblock %}

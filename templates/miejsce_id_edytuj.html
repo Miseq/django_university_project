@@ -1,0 +1,47 @@
+{% extends "index_base.html" %}
+{% load static %}
+
+{% block body %}
+
+    <br><br>
+
+    <div class="container">
+        <h2>Edycja strony miejsca {{ PlaceID }}</h2>
+
+        {% if error == 1 %}
+            <div class="alert alert-danger">
+                <strong>Uwaga!</strong> {{ message }}
+            </div>
+        {% endif %}
+
+        {% if error == 0 %}
+            <form method="POST">
+            {% csrf_token %}
+            <br>
+            <div class="form-group">
+                <label for="usr">Nowe zdjecie:</label><br>
+                <input type="text" class="form-control" id="usr" name="place_photo" value="{{ GotPlace.IconURL }}"><br>
+                <picture>
+                    <center><img src="{{ GotPlace.IconURL }}" class="img-thumbnail" alt="Cinque Terre"
+                                 style="width:auto;"></center>
+                </picture>
+            </div>
+
+            <div class="form-group">
+                <label for="usr">Nowa nazwa:</label>
+                <input type="text" class="form-control" id="usr" name="place_name" value="{{ GotPlace.Name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="comment">Nowy opis:</label>
+                <textarea class="form-control" rows="5" id="comment"
+                          name="place_desc">{{ GotPlace.Description }}</textarea>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Zapisz</button><br><br>
+        {% endif %}
+        </form><br>
+    </div>
+
+{% endblock %}

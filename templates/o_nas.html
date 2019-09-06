@@ -1,0 +1,79 @@
+﻿{% extends "index_base.html" %}
+{% load static %}
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-lg-offset-5">
+                <br/>
+                {% if error == 1 %}
+
+                    <h1>
+                        <center>Co oferuję ta strona?</center>
+                    </h1></br>
+                    <div>
+                        <left>Dzięki naszej stronie, możesz bez oganiczej poznawać wszelakie miejsca w województwie
+                            podkarpackim. Strona oferuję wyszukiwanie i wyznaczanie tras dojazdu do danego miejsca,
+                            ciekawe miejsca postojowe jak i różne atrakcje danej miejscowości. Na stronie prowadzony
+                            jest ranking najciekawszych miejsc, który funkcjonuje dzięki naszym użytkowników, którzy
+                            oceniają miejsca w których byli. Dzięki naszej stronie wiele ukrytych pereł podkarpacia
+                            zostaje odkryta na nowo. Teraz możesz łatwo znaleść ciekawe miejsca na odwiedziny ze swoją
+                            rodziną.
+                            Po stworzeniu konta na stronie dostajemy możliwość współudziału w naszym projekcie w celu
+                            dostarczeniu informacji o danym miejscu. Strona została utworzona przez grupę labolatoryjną
+                            nr.1 studentow informatyki przy wspolpracy z studentami z wydzialu zarzadzania. W celu
+                            zaliczeniu praktyki z przedmiót Inżynieria Oprogramowania oraz Bazy Danych.
+                        </left>
+                    </div></br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+
+                    <h4>
+                        <center><p>Jeśli chciałbyś udzielić nam rad nad projektem lub skontaktować się z nami - kniknij
+                            w poniższy guzik.</p></center>
+                    </h4></br>
+                    <center><a href="http://127.0.0.1:8000/kontakt/" class="btn btn-primary">Przejdź do kontaktu</a>
+                    </center>
+
+                {% endif %}
+
+                {% if error == 0 %}
+                    <h1>
+                        <center>Co oferuję ta strona?</center>
+                    </h1></br>
+                    <div>
+                        <left>Dzięki naszej stronie, możesz bez oganiczej poznawać wszelakie miejsca w województwie
+                            podkarpackim. Strona oferuję wyszukiwanie i wyznaczanie tras dojazdu do danego miejsca,
+                            ciekawe miejsca postojowe jak i różne atrakcje danej miejscowości. Na stronie prowadzony
+                            jest ranking najciekawszych miejsc, który funkcjonuje dzięki naszym użytkowników, którzy
+                            oceniają miejsca w których byli. Dzięki naszej stronie wiele ukrytych pereł podkarpacia
+                            zostaje odkryta na nowo. Teraz możesz łatwo znaleść ciekawe miejsca na odwiedziny ze swoją
+                            rodziną.
+                            Po stworzeniu konta na stronie dostajemy możliwość współudziału w naszym projekcie w celu
+                            dostarczeniu informacji o danym miejscu. Strona została utworzona przez grupę labolatoryjną
+                            nr.1 studentow informatyki przy wspolpracy z studentami z wydzialu zarzadzania. W celu
+                            zaliczeniu praktyki z przedmiót Inżynieria Oprogramowania oraz Bazy Danych.
+                        </left>
+                    </div></br>
+
+
+                    <h4>Strona zostala utworzona przez:</br></h4>
+                    {% for i in ad %}
+                        <h5>{{ i.username }} - {{ i.email }}</h5> </br>
+                    {% endfor %}
+                    </br>
+
+                    <h4>
+                        <center><p>Jeśli chciałbyś udzielić nam rad nad projektem lub skontaktować się z nami - kniknij
+                            w poniższy guzik.</p></center>
+                    </h4></br>
+                    <center><a href="http://127.0.0.1:8000/kontakt/" class="btn btn-primary">Przejdź do kontaktu</a>
+                    </center>
+
+                {% endif %}
+                </br>
+                </br>
+                </br>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "index_base.html" %}
+{% load static %}
+
+{% block body-fw %}
+    <style scoped>
+        .mapa {
+            width: 100%;
+            height: 80vh;
+            z-index: -1;
+        }
+
+        .blok {
+            width: 100%;
+            height: 80vh;
+            display: block;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .nopadding {
+            padding: 0 !important;
+        }
+
+        #mainMap {
+            height: 100%;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-12 nopadding" style="height: 600px;">
+            <div class="prostokat" id="mainMap">
+                <p>To jest strona główna naszej aplikacji. Tutaj będzie znajdowała się mapa.</p>
+            </div>
+            <script src="{% static "jsscripts/mainMap.js" %}"></script>
+            <script async
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKrOdGCZ7anbPZ7Az1BaMpywdGz6F19Qg&callback=initMap"></script>
+        </div>
+    </div>
+
+    <div style="background-color: rgb(243, 243, 243); border-top: 2px solid rgb(57, 57, 57); box-shadow: 0px -6px 20px 0vh rgba(0, 0, 0, 0.28);">
+        <div class="container">
+            <br/>
+            <h4>Najciekawsze miejsca</h4>
+            <br/>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="card" style="width: 18rem; margin: 0 auto;">
+                        <img class="card-img-top" src="http://fotopolska.eu/foto/459/459330.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Pomnik czynu rewolucyjnego</h5>
+                            <p class="card-text">Monument znajdujący się w samym centrum Rzeszowa u zbiegu alei Łukasza
+                                Cieplińskiego i alei Józefa Piłsudskiego.</p>
+                            <a href="#" class="btn btn-primary">Szczegóły</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="card" style="width: 18rem; margin: 0 auto;">
+                        <img class="card-img-top"
+                             src="https://upload.wikimedia.org/wikipedia/commons/7/72/Rzesz%C3%B3w_zamek_2004b.jpg"
+                             alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Zamek Lubomirskich</h5>
+                            <p class="card-text">Zamek w Rzeszowie – jeden z głównych zabytków miasta wybudowany w
+                                latach 1902–1906 na miejscu dawnego zamku Lubomirskich. Jest ulokowany pomiędzy aleją
+                                Pod Kasztanami, aleją Lubomirskich, ulicą Chopina, placem Śreniawitów oraz ulicą płk.
+                                Lisa-Kuli.</p>
+                            <a href="#" class="btn btn-primary">Szczegóły</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="card" style="width: 18rem; margin: 0 auto;">
+                        <img class="card-img-top"
+                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Monument_to_Cursed_Soldiers_in_Rzesz%C3%B3w_0_c.jpg/240px-Monument_to_Cursed_Soldiers_in_Rzesz%C3%B3w_0_c.jpg"
+                             alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Pomnik żołnierzy wyklętych</h5>
+                            <p class="card-text">Pomnik Żołnierzy Wyklętych w Rzeszowie – pomnik poświęcony polskim
+                                działaczom podziemia antykomunistycznego, położony w Rzeszowie. Autorem projektu
+                                monumentu i wykonawcą był Karol Badyna.</p>
+                            <a href="#" class="btn btn-primary">Szczegóły</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+
+{% endblock %}

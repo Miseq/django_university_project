@@ -1,0 +1,37 @@
+{% extends "index_base.html" %}
+{% load static %}
+
+{% block body %}
+
+    <p>
+    <center><h3>Dodawanie nowej trasy</h3></center></p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% if user.is_authenticated %}
+            <form>
+                <div class="container">
+                    <div class="form-group">
+                        <label for="usr">Nazwa trasy:</label>
+                        <input type="text" class="form-control" id="usr" name="route_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Opis trasy:</label>
+                        <textarea class="form-control" rows="5" id="comment" name="route_desc"></textarea>
+                    </div>
+                    <p>Listę miejsc można modyfikować po dodaniu miejsca.</p>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Dodaj</button>
+                    <br><br>
+                </div>
+            </form>
+        {% elif 1 %}
+            <div class="alert alert-danger">
+                <strong><a href="../../../logowanie/">
+                    <p class="rate pdn">Zaloguj się aby móc dodawać trasy.</p>
+                </a></strong>
+            </div>
+        {% endif %}
+
+{% endblock %}

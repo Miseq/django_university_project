@@ -1,0 +1,265 @@
+{% extends "index_base.html" %} {% load static %} {% block body %}
+
+
+
+    <style>
+        .row {
+            padding-bottom: 15px;
+        }
+
+        .imgwrapper {
+            display: block;
+        }
+
+        .pdn {
+            padding-left: 15px;
+        }
+
+        .wrapper {
+            width: 50%;
+        }
+
+        .container {
+            padding-top: 30px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        }
+
+        .img-start {
+            margin-top: 20px !important;
+        }
+
+        .ocena {
+            text-align: center;
+            display: flex;
+            margin: auto;
+        }
+
+        .rate {
+            padding-top: 8px;
+        }
+
+        .desc {
+            padding-top: 15px;
+            text-indent: 40px;
+        }
+
+        .nav {
+            padding-top: 25px;
+        }
+
+        /* CSS Test begin */
+
+        .comment-box {
+            margin-top: 30px !important;
+        }
+
+        /* CSS Test end */
+
+        .comment-box img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .comment-box .media-left {
+            padding-right: 10px;
+            width: 65px;
+        }
+
+        .comment-box .media-body p {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .comment-box .media-body .media p {
+            margin-bottom: 0;
+        }
+
+        .comment-box .media-heading {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 7px 10px;
+            position: relative;
+            margin-bottom: -1px;
+        }
+
+        .comment-box .media-heading:before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-width: 1px 0 0 1px;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            position: absolute;
+            top: 10px;
+            left: -6px;
+        }
+
+        .stars {
+            background: #ffffff;
+            height: 30px;
+            width: 200px;
+            padding: 10px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row-reverse;
+        }
+
+        .stars input {
+            position: absolute;
+            left: -99999px;
+        }
+
+        .star label {
+            width: 30px;
+            height: 30px;
+            padding: 5px;
+            color: transparent;
+        }
+
+        .star label::before {
+            content: '★';
+            color: #c0c0c0;
+            font-size: 30px;
+            line-height: 30px;
+            margin-right: -100%;
+        }
+
+        .star label:hover::before,
+        .star label:hover ~ label::before,
+        .stars input:checked ~ label::before {
+            color: #ffa500;
+        }
+    </style>
+    <div class="container">
+        <div class="row" class="place">
+            <div class="col">
+                <div class="text-center mb-5">
+                    <div class="imgwrapper">
+                        <img class="img-fluid img-responsive" src="{{ GotPlace.IconURL }}" style="max-height: 400px"
+                             height="auto"
+                             width="auto" alt="Cinque Terre">
+                    </div>
+                </div>
+
+                <h2 class="center">{{ GotPlace.Name }}</h2>
+                {% if isAuthor %}
+                    <p>Jesteś autorem tego miejsca, możesz edytować jego treść:
+                        <a href="../miejsce_id_edytuj/{{ placeID }}">Edytuj</a>
+                    </p>
+                {% endif %}
+                <div class="ocena">
+                    <p class="rate">Ocena miejsca: {{ notePlace }}/5</p>
+                </div>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                           role="tab" aria-controls="nav-home"
+                           aria-selected="true">Opis:</a>
+                    </div>
+                </nav>
+                <p class="desc">{{ GotPlace.Description }}</p>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                                   role="tab" aria-controls="nav-home"
+                                   aria-selected="true">Komentarze:</a>
+                            </div>
+                        </nav>
+                        {% for comment, profile in commentsAndProfiles %}
+                            <div class="media comment-box">
+                                <div class="media-left">
+                                    <a href="#">
+
+                                        <img class="img-responsive user-photo" src="
+                                                {% if profile.AvatarURL %}{{ profile.AvatarURL }}{% elif 1 %}http://fastestlaps.com/ui_images/default_avatar.png{% endif %}">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="media-heading">{{ comment.UserID }}</h5>
+                                    <p>{{ comment.Content }}</p>
+                                </div>
+                            </div>
+                        {% endfor %} {% if user.is_authenticated %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="comment">Dodaj komentarz:</label>
+                                <textarea class="form-control" rows="5" id="comment" name="place_comment"></textarea>
+                            </div>
+                            <button type="submit" name="dodaj_kom" class="btn btn-primary">Dodaj</button>
+                        </form>
+                    {% elif 1 %}
+                        <a href="../../../logowanie/">
+                            <p>Zaloguj się aby skomentować</p>
+                        </a>
+                    {% endif %}
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                                   role="tab" aria-controls="nav-home"
+                                   aria-selected="true">Oceny:</a>
+                            </div>
+                        </nav>
+                        <!--
+              {% for n in placeNotes %}
+              <div class="media comment-box">
+                  <div class="media-left">
+                    <a href="#">
+                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h5 class="media-heading">{{ c.UserID }}</h5>
+                    <p>{{ c.Note }}</p>
+                  </div>
+              </div>
+              {% endfor %}-->
+                        {% if user.is_authenticated %}
+
+                            <form method="POST">
+                                {% csrf_token %}
+                                <p class="mt-2">Dodaj ocenę:</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="stars star">
+                                            <input type="radio" id="star5" name="place_note" value="5">
+                                            <label for="star5" class="star"> </label>
+                                            <input type="radio" id="star4" name="place_note" value="4">
+                                            <label for="star4" class="star"></label>
+                                            <input type="radio" id="star3" name="place_note" value="3">
+                                            <label for="star3" class="star"> </label>
+                                            <input type="radio" id="star2" name="place_note" value="2">
+                                            <label for="star2" class="star"> </label>
+                                            <input type="radio" id="star1" name="place_note" value="1" checked>
+                                            <label for="star1" class="star"> </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary">Dodaj</button>
+                                    </div>
+                                </div>
+                            </form>
+                        {% elif 1 %}
+                            <a href="../../../logowanie/">
+                                <p class="rate pdn">Zaloguj się aby ocenić</p>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

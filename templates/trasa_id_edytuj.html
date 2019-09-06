@@ -1,0 +1,39 @@
+{% extends "index_base.html" %}
+{% load static %}
+
+{% block body %}
+
+    <p>
+    <center><h3>Edycja trasy {{ RouteID }}</h3></center></p>
+
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% if error == 0 %}
+            <form>
+                <div class="container">
+                    <div class="form-group">
+                        <label for="usr">Nazwa trasy:</label>
+                        <input type="text" class="form-control" id="usr" name="route_name" value="{{ route.Name }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Opis trasy:</label>
+                        <textarea class="form-control" rows="5" id="comment"
+                                  name="route_desc">{{ route.Description }}</textarea>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Potwierdź zmiany</button>
+                    <br><br>
+                </div>
+            </form>
+        {% endif %}
+        {% if error == 1 %}
+            <div class="alert alert-danger">
+                <strong>
+                    <p class="rate pdn">Nie możesz edytować tej trasy - nie jesteś jej właścicielem.</p>
+                </strong>
+            </div>
+        {% endif %}
+
+{% endblock %}

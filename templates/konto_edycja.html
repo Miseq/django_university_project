@@ -1,0 +1,75 @@
+{% extends "index_base.html" %}
+{% load static %}
+{% block body %}
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-3">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+                       aria-controls="v-pills-profile" aria-selected="true">Zmiana nazwy użytkownika</a>
+                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
+                       aria-controls="v-pills-messages" aria-selected="false">Zmiana hasła</a>
+                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+                       aria-controls="v-pills-settings" aria-selected="false">Zmiana prywatności</a>
+                </div>
+            </div>
+            <div class="col-9">
+                <div style="text-align:center;margin-top:5px;padding:10px;border-radius:4px;background-color: {% ifequal error 1 %}#fb5353;{% else %}transparent; {% endifequal %}">
+                    <h5 style="{% ifequal error 1 %}color:#CC0101;{% else %}color:#7CFC00; {% endifequal %}">{{ message }}</h5>
+                </div>
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                         aria-labelledby="v-pills-home-tab">
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                         aria-labelledby="v-pills-profile-tab">
+                        <form action='#' method='post'>
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ forms1.username.errors }}
+                                <label for="{{ forms1.username.id_for_label }}">Nowa nazwa użytkownika:</label>
+                                {{ forms1.username }}
+                                <input type="hidden" value="b1" name="c"/>
+                                <input type="submit" class="btn btn-primary" style="width: 100%;margin-top:10px;"
+                                       value="Zmień nazwę użytokownika"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+                         aria-labelledby="v-pills-messages-tab">
+                        <form action='#' method='post'>
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ forms2.old_pass.errors }}
+                                <label for="{{ forms2.old_pass.id_for_label }}">Stare hasło:</label>
+                                {{ forms2.old_pass }}
+                                {{ forms2.new_pass.errors }}
+                                <label for="{{ forms2.new_pass.id_for_label }}">Nowe hasło:</label>
+                                {{ forms2.new_pass }}
+                                {{ forms2.new_pass1.errors }}
+                                <label for="{{ forms2.new_pass1.id_for_label }}">Powtórz nowe hasło:</label>
+                                {{ forms2.new_pass1 }}
+                                <input type="hidden" value="b2" name="c"/>
+                                <input type="submit" class="btn btn-primary" style="width: 100%;margin-top:10px;"
+                                       value="Zmień hasło"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
+                         aria-labelledby="v-pills-settings-tab">
+                        <form action='#' method='post'>
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="{{ forms1.accountVisible.id_for_label }}">Widoczność profilu: </label>
+                                {{ forms3.accountVisible }}
+                                <input type="hidden" value="b3" name="c"/>
+                                <input type="submit" class="btn btn-primary" style="width: 100%;margin-top:10px;"
+                                       value="Zmień ustawienia prywatności"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

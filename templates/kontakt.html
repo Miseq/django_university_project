@@ -1,0 +1,54 @@
+{% extends "index_base.html" %}
+{% load static %}
+{% block body %}
+
+    <div class="container">
+
+        <div class="form-group">
+
+            <div class="col-lg-5 col-lg-offset-2">
+                <h1>Kontakt</h1>
+
+                <div class="clearfix"></div>
+                <hr style="margin:10px 0 5px 0;">
+
+                <div class="col-sm-5 tital">Imie:</div>
+                <div class="col-auto">{{ Profile.FirstName }}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <hr style="margin:10px 0 5px 0;">
+
+                <div class="col-sm-5 tital">Nazwisko:</div>
+                <div class="col-auto">{{ Profile.Surname }}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <hr style="margin:10px 0 5px 0;">
+
+                <div class="col-sm-5 tital">Email:</div>
+                <div class="col-auto" style="word-wrap:break-word;">{{ Profile.Email }}</div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <hr style="margin:10px 0 5px 0;">
+
+            </div>
+            <div class="form-group">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <form role="form" action="" method="POST">
+                        {% csrf_token %}
+                        <form>
+                            <label for="comment">Wiadomosc:</label>
+
+                            <textarea class="form-control" id="comment" name="form_message"></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Wyslij</button>
+                            <br><br>
+
+                </div>
+            </div>
+
+            </form>
+
+
+{% endblock %}
